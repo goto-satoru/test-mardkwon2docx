@@ -38,8 +38,7 @@ jobs:
             --from markdown \
             --to docx \
             --toc \
-            --number-sections \
-            --syntax-highlighting pygments
+            --number-sections 
 
       - name: Check for changes
         id: verify
