@@ -1,0 +1,88 @@
+name: Convert All Markdown to Multiple Formats
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'sample.md'
+      - '.github/workflows/convert-all-formats.yml'
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  convert-all:
+    name: Generate All Document Formats
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc wkhtmltopdf
+
+      - name: Verify Pandoc installation
+        run: pandoc --version
+
+      - name: Convert to Word (.docx)
+        run: |
+          pandoc sample.md -o sample.docx \
+            --from markdown \
+            --to docx \
+            --toc \
+            --number-sections \
+            --syntax-highlighting pygments
+
+      - name: Convert to PDF
+        run: |
+          pandoc sample.md -o sample.pdf \
+            --from markdown \
+            --to pdf \
+            --toc \
+            --number-sections \
+            --syntax-highlighting pygments
+
+      - name: Convert to HTML
+        run: |
+          pandoc sample.md -o sample.html \
+            --from markdown \
+            --to html \
+            --standalone \
+            --toc \
+            --number-sections \
+            --syntax-highlighting pygments \
+            --css=style.css
+
+      - name: Check for changes
+        id: verify
+        run: |
+          if git diff --quiet sample.docx sample.pdf sample.html; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure Git
+        if: steps.verify.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit changes
+        if: steps.verify.outputs.changed == 'true'
+        run: |
+          git add sample.docx sample.pdf sample.html
+          git commit -m "docs: auto-generate documents from sample.md"
+
+      - name: Push changes
+        if: steps.verify.outputs.changed == 'true'
+        run: git push
