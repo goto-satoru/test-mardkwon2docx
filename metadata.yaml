@@ -1,0 +1,38 @@
+---
+title: Professional Report Template
+subtitle: A Comprehensive Example for Document Generation
+author:
+- John Doe
+- Jane Smith
+date: April 1, 2026
+document-lang: en
+document-timezone: UTC
+format:
+  docx:
+    reference-doc: reference.docx
+    highlight-style: pygments
+    number-sections: true
+    toc: true
+  pdf:
+    highlight-style: pygments
+    number-sections: true
+    toc: true
+geometry:
+- margin=1in
+- top=1.5in
+header-includes: |
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{Professional Report}
+  \fancyhead[R]{April 1, 2026}
+keywords:
+- pandoc
+- markdown
+- word
+- automation
+abstract: |
+  This is a sample metadata file that demonstrates how to customize document
+  generation with pandoc. It includes author information, document styling
+  preferences, and other metadata that can be embedded in the output document.
+---
+

@@ -1,0 +1,59 @@
+# Generated Documents
+*.docx
+*.pdf
+*.html
+*.odt
+*.txt
+
+# Pandoc temporary files
+.pandoc/
+pandoc-tmp/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+.emacs.d/
+*.sublime-project
+*.sublime-workspace
+.atom/
+
+# Build and Cache
+.cache/
+*.pyc
+__pycache__/
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+*.out
+
+# Temporary files
+.tmp/
+temp/
+*.temp
+*.bak
+
+# Keep these tracked
+!sample.md
+!Makefile
+!convert.sh
+!style.css
+!metadata.yaml
+!README.md
+!QUICKSTART.md
+!
