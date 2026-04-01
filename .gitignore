@@ -1,8 +1,8 @@
 # Generated Documents
-*.docx
-*.pdf
+#*.docx
+#*.pdf
 *.html
-*.odt
+#*.odt
 *.txt
 
 # Pandoc temporary files

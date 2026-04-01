@@ -40,6 +40,13 @@ jobs:
             --toc \
             --number-sections 
 
+      - name: Upload Word document as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-document
+          path: sample.docx
+          retention-days: 30
+
       - name: Check for changes
         id: verify
         run: |
